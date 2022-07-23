@@ -1,0 +1,78 @@
+<html>
+<p>Balance <span id="total"></span> </p>
+<ul id="list1"></ul> 
+<ul id="list2"></ul> 
+<input id= "number"/>
+<button id=button>Showing</button> 
+<button id=button1>Total Earning</button> 
+<button id=button2>Total Expenses</button> 
+<button id=button3>Balance</button> 
+<p>Balance <span id="total"></span> </p>
+<ul id="list1"></ul> 
+<ul id="list2"></ul> 
+<input id= "number"/>
+<button id=button>Showing</button> 
+<button id=button1>Total Earning</button> 
+<button id=button2>Total Expenses</button> 
+<button id=button3>Balance</button> 
+</html>
+
+<script>
+var Balance, Earnings, num, Expenses;
+
+function getNumberOrString(value) {
+  // Convert a string value to a number if possible
+  let number_value = Number(value);
+  if (Number.isNaN(number_value)) {
+    return value
+  } else {
+    return number_value
+  }
+}
+
+
+Earnings = [0, 0, 0];
+Expenses = [0, 0, 0];
+Balance = [];
+
+
+document.getElementById('button').addEventListener('click', (event) => {
+  num = getNumberOrString(document.getElementById('number').value);
+  if (num >= 0) {
+    Earnings.push(num);
+    let element_list1 = document.getElementById('list1');
+    let new_li = document.createElement('li');
+    new_li.innerText = num;
+
+    element_list1.appendChild(new_li);
+  }
+  if (num < 0) {
+    Expenses.unshift(num);
+    let element_list2 = document.getElementById('list2');
+    element_list2.innerText = num;
+  }
+  Balance.push(num);
+
+});
+
+document.getElementById('button1').addEventListener('click', (event) => {
+  event.target.innerText = Earnings.reduce((a,b) => a+b, 0);
+  event.target.style.color = '#3366ff';
+
+});
+
+document.getElementById('button2').addEventListener('click', (event) => {
+  event.target.innerText = Expenses.reduce((a,b) => a+b, 0);
+  event.target.style.color = '#ff0000';
+
+});
+Balance;
+
+
+document.getElementById('button3').addEventListener('click', (event) => {
+  event.target.innerText = Balance.reduce((a,b) => a+b, 0);
+  event.target.style.color = '#33ff33';
+
+});
+</script>
+
